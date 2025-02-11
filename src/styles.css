@@ -1,0 +1,82 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header{
+    height: 10rem;
+    font-family: 'Times New Roman', Times, serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: pink;
+    padding: 2.5rem;
+}
+
+button {
+    padding: 0.5rem;
+    background-color: #f0a500;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 8%;
+}
+
+button:hover {
+    background-color: #e08e00;
+}
+
+.headerText{
+    font-family:cursive;
+    display:block;
+    color: #D81159;
+    font-weight: bolder;
+    font-size: 2.3rem;
+}
+
+#content{
+    display: flex;
+    flex:1;
+    gap: 20px;
+    background-color: white;
+}
+
+.bodyContent{
+    height:fit-content;
+    flex: 1;
+    width: 500px;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color:#8F2D56;
+    padding: 0.5rem;
+}
+
+.homeImg{
+    width: 400px;
+    height: auto;
+    object-fit: cover;
+}
+
+.menuitem{
+    height: 25rem;
+    width: 20rem;
+    display: flex;
+    border: solid pink 4px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem;
+    margin: 2rem;
+    color:#8F2D56;
+    border-radius: 10%;
+}
+
+.itemImg{
+    width:10rem;
+    height:10rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.contact{
+    padding: 1rem;
+    align-items: center;
+}
