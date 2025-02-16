@@ -11,12 +11,6 @@ module.exports = {
     clean: true,
   },
   devtool: "eval-source-map",
-  devServer: {
-    port: 8080, // Server port
-    open: true, // Automatically opens the browser
-    hot: true, // Enable Hot Module Replacement (HMR)
-    watchFiles: ["./src/template.html"],
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
