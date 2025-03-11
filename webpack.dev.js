@@ -5,6 +5,7 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
+        host: "0.0.0.0",
         port: 8080, // Server port
         open: true, // Automatically opens the browser
         hot: true, // Enable Hot Module Replacement (HMR)
