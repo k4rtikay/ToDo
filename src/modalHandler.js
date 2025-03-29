@@ -1,5 +1,5 @@
 
-function initializeModalListeners() {
+function initializeModalListeners() { 
     document.querySelector('.addProject').addEventListener('click', (e) => {
         e.stopPropagation(); //prevents the global click event from closing it
         document.querySelector('.ProjectModal').showModal();
