@@ -3,8 +3,6 @@ import { isToday,isAfter,parseISO,isThisWeek,endOfWeek } from "date-fns";
 
 export const projectDisplay = function(name){
     const newProject = document.createElement('button');
-    //const projectName=name.replace(/\s+/g, "").toLowerCase();
-    //newProject.classList.add(projectName)
     newProject.setAttribute("data-project",name);
     newProject.classList.add('projectButton');
     newProject.textContent=name;
@@ -12,8 +10,9 @@ export const projectDisplay = function(name){
 };
 
 export const taskDisplay = function(todo){
-    console.log(todo);
     const taskEntry = document.createElement('div');
+    taskEntry.classList.add('taskEntry');
+
     const newTask = document.createElement('div');
     newTask.textContent=todo.name;
 
@@ -21,8 +20,10 @@ export const taskDisplay = function(todo){
     checkbox.type = "checkbox";
 
     checkbox.addEventListener('change',()=>{
-        taskEntry.remove();
+        taskEntry.style.color = checkbox.checked ? "#B3B3BC" : "black";
     })
+
+    taskEntry.appendChild(checkbox);
 
     const dlt = document.createElement('button');
     dlt.textContent='delete'
@@ -46,7 +47,6 @@ export const taskDisplay = function(todo){
     }
 
     taskEntry.appendChild(newTask);
-    taskEntry.appendChild(checkbox);
     taskEntry.appendChild(dlt);
 
     document.querySelector('.taskContainer').appendChild(taskEntry);

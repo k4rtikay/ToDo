@@ -18,6 +18,7 @@ document.querySelector('.submitTask').addEventListener('click',()=>{
     const project = document.querySelector("#selectProject").value;
 
     createTodo(title,date,important,project);
+    taskfilter(project);
 })
 
 document.querySelector('.project').addEventListener('click', (event) => {
