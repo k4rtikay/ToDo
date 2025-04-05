@@ -1,14 +1,22 @@
 import "./styles.css";
 import { initializeModalListeners } from "./modalHandler.js";
-import { projectDisplay, taskfilter, todayFilter, weekFilter, laterFilter } from "./displayUpdater.js";
-import { createProject,createTodo } from "./creator.js";
+import { taskfilter, todayFilter, weekFilter, laterFilter, renderAllProjects } from "./displayUpdater.js";
+import { createProject,createTodo, state } from "./creator.js";
 
 document.addEventListener('DOMContentLoaded',initializeModalListeners);
+
+
+document.addEventListener('DOMContentLoaded',()=>{
+    const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+    state.todoArr = savedTodos;
+    state.prjArr = JSON.parse(localStorage.getItem('projects')) || [];
+    renderAllProjects()
+})
+
 
 document.querySelector('.submitProject').addEventListener('click',()=>{
     const projectTitle = document.querySelector('#projectTitle');
     createProject(projectTitle.value);
-    projectDisplay(projectTitle.value);
 })
 
 document.querySelector('.submitTask').addEventListener('click',()=>{

@@ -1,5 +1,10 @@
+import { renderAllProjects } from "./displayUpdater";
 
-let todoArr = [];
+const state = {
+    todoArr: [],
+    prjArr: []
+  };
+  
 
 const createTodo = function(name,duedate,important,project){
     let todo ={
@@ -9,14 +14,14 @@ const createTodo = function(name,duedate,important,project){
         project: project
     }
 
-    todoArr.push(todo);
+    state.todoArr.push(todo);
+    localStorage.setItem("todos",JSON.stringify(state.todoArr));
 }
 
-const createProject = function(name){
-    const option = document.createElement('option');
-    option.value=name;
-    option.textContent=name;
-    document.querySelector("#selectProject").append(option);
+function createProject(name) {
+    state.prjArr.push(name);
+    localStorage.setItem("projects", JSON.stringify(state.prjArr));
+    renderAllProjects(); // Refreshes the DOM
 }
 
-export {createTodo,createProject,todoArr}
+export {createTodo,createProject,state}

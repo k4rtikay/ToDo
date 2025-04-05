@@ -8,11 +8,12 @@
 </head>
 <body>
     <div class="container">
-        <div class="project">
+        <div class="projectPane">
             <button class="addProject">Add a project</button>
             <button class="today">Today</button>
             <button class="thisWeek">This Week</button>
             <button class="later">Sometime Later</button>
+            <div class="project"></div>
         </div> 
         <div class="task">
             <button class="addTask">Add a To-Do</button>
@@ -34,6 +35,27 @@
             <input type="text" name="title" id="taskTitle" required>
             <label for="DueDate">Due Date:</label>
             <input type="date" name="DueDate" id="DueDate" required>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea><br>
+            <label><input type="checkbox" name="category" value="Important" id="important"> Important</label>
+            <label for="project">Select project:</label>
+            <select name="project" id="selectProject" required>
+                <option value="Today">Today</option>
+                <option value="This week">This week</option>
+                <option value="Sometime later">Sometime later</option>
+            </select>
+            <button type="submit" class="submitTask">Submit</button>
+        </form>
+    </dialog>
+
+    <dialog class="editModal">
+        <form id="editForm">
+            <label for="title">Title:</label>
+            <input type="text" name="title" id="editTitle" required>
+            <label for="DueDate">Due Date:</label>
+            <input type="date" name="DueDate" id="DueDate" required>
+            <label for="description">Description:</label><br>
+            <textarea id="description" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea><br>
             <label><input type="checkbox" name="category" value="Important" id="important"> Important</label>
             <label for="project">Select project:</label>
             <select name="project" id="selectProject" required>

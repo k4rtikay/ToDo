@@ -1,13 +1,26 @@
-import { todoArr } from "./creator.js"
+import { state } from "./creator.js"
 import { isToday,isAfter,parseISO,isThisWeek,endOfWeek } from "date-fns";
 
-export const projectDisplay = function(name){
-    const newProject = document.createElement('button');
-    newProject.setAttribute("data-project",name);
-    newProject.classList.add('projectButton');
-    newProject.textContent=name;
-    document.querySelector('.project').appendChild(newProject);
-};
+export function renderAllProjects() {
+    document.querySelector("#selectProject").innerHTML = "";
+    document.querySelector(".project").innerHTML = "";
+
+    state.prjArr.forEach(name => {
+        // Option for select dropdown
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        document.querySelector("#selectProject").append(option);
+
+        // Project button
+        const newProject = document.createElement("button");
+        newProject.setAttribute("data-project", name);
+        newProject.classList.add("projectButton");
+        newProject.textContent = name;
+        document.querySelector(".project").appendChild(newProject);
+    });
+}
+
 
 export const taskDisplay = function(todo){
     const taskEntry = document.createElement('div');
@@ -28,7 +41,8 @@ export const taskDisplay = function(todo){
     const dlt = document.createElement('button');
     dlt.textContent='delete'
     dlt.addEventListener('click',()=>{
-        todoArr.splice(todoArr.indexOf(todo), 1);
+        state.todoArr.splice(state.todoArr.indexOf(todo), 1);
+        localStorage.setItem("todos",JSON.stringify(todoArr));
         taskEntry.remove();
     })
 
@@ -55,7 +69,7 @@ export const taskDisplay = function(todo){
 export const taskfilter= function(prj){
     document.querySelector('.taskContainer').innerHTML="";
     
-    const filteredTasks= todoArr.filter(task=>task.project==prj);
+    const filteredTasks= state.todoArr.filter(task=>task.project==prj);
 
     filteredTasks.forEach(task=>{
         taskDisplay(task);
@@ -63,10 +77,10 @@ export const taskfilter= function(prj){
 };
 
 export const todayFilter = function(){
-if(todoArr.length>0)
+if(state.todoArr.length>0)
     document.querySelector('.taskContainer').innerHTML="";
     
-    const todayTasks= todoArr.filter(task=>isToday(parseISO(task.duedate)));
+    const todayTasks= state.todoArr.filter(task=>isToday(parseISO(task.duedate)));
 
     todayTasks.forEach(task=>{
         taskDisplay(task);
@@ -74,10 +88,10 @@ if(todoArr.length>0)
 }
 
 export const weekFilter = function(){
-    if(todoArr.length>0){
+    if(state.todoArr.length>0){
         document.querySelector('.taskContainer').innerHTML="";
     
-        const weekTasks= todoArr.filter(task=>isThisWeek(parseISO(task.duedate),{weekStartsOn: 1}));
+        const weekTasks= state.todoArr.filter(task=>isThisWeek(parseISO(task.duedate),{weekStartsOn: 1}));
 
         weekTasks.forEach(task=>{
             taskDisplay(task);
@@ -86,11 +100,11 @@ export const weekFilter = function(){
 }
 
 export const laterFilter = function(){
-    if(todoArr.length>0){
+    if(state.todoArr.length>0){
         document.querySelector('.taskContainer').innerHTML="";
     
         let weekEnd = endOfWeek(new Date(), {weekStartsOn: 1});
-        const laterTasks= todoArr.filter(task=>isAfter(parseISO(task.duedate),weekEnd));
+        const laterTasks= state.todoArr.filter(task=>isAfter(parseISO(task.duedate),weekEnd));
 
         laterTasks.forEach(task=>{
             taskDisplay(task);
