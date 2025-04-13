@@ -1,9 +1,11 @@
 import "./styles.css";
-import { initializeModalListeners } from "./modalHandler.js";
-import { taskfilter, todayFilter, weekFilter, laterFilter, renderAllProjects } from "./displayUpdater.js";
+import { initializeModalListeners, openEditModal } from "./modalHandler.js";
+import { renderAllTodos, todayFilter, weekFilter, laterFilter, renderAllProjects } from "./displayUpdater.js";
 import { createProject,createTodo, state } from "./creator.js";
 
 document.addEventListener('DOMContentLoaded',initializeModalListeners);
+
+//document.addEventListener('DOMContentLoaded',openEditModal);
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -24,16 +26,18 @@ document.querySelector('.submitTask').addEventListener('click',()=>{
     const date = document.querySelector("#DueDate").value;
     const important = document.querySelector("#important").checked;
     const project = document.querySelector("#selectProject").value;
+    const description = document.querySelector("#description").value;
 
-    createTodo(title,date,important,project);
-    taskfilter(project);
+    createTodo(title,date,important,project,description);
+    //renderAllTodos(project);
 })
 
 document.querySelector('.project').addEventListener('click', (event) => {
-    if (event.target.classList.contains('projectButton')) {
-        const prj = event.target.getAttribute('data-project');
-        taskfilter(prj);
-    }
+    const button = event.target.closest('.projectButton');
+    if (!button) return;
+
+    const prj = button.getAttribute('data-project');
+    renderAllTodos(prj);
 });
 
 document.querySelector('.today').addEventListener('click',()=>{

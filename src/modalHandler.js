@@ -10,6 +10,7 @@ function initializeModalListeners() {
         document.querySelector('.TaskModal').showModal();
     });
 
+
     document.addEventListener("click", (e) => {
         const openDialog = document.querySelector("dialog[open]");
         if (!openDialog) return;
@@ -34,4 +35,9 @@ function initializeModalListeners() {
 
 }
 
-export { initializeModalListeners };
+function openEditModal(){
+    const editModal = document.querySelector('.editModal');
+    if(editModal) editModal.showModal();
+}
+
+export { initializeModalListeners, openEditModal };

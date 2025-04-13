@@ -1,5 +1,7 @@
 import { state } from "./creator.js"
 import { isToday,isAfter,parseISO,isThisWeek,endOfWeek } from "date-fns";
+import { taskEditor } from "./taskEditor.js";
+import { openDeleteModal } from "./projectEditor.js";
 
 export function renderAllProjects() {
     document.querySelector("#selectProject").innerHTML = "";
@@ -16,8 +18,29 @@ export function renderAllProjects() {
         const newProject = document.createElement("button");
         newProject.setAttribute("data-project", name);
         newProject.classList.add("projectButton");
-        newProject.textContent = name;
         document.querySelector(".project").appendChild(newProject);
+
+        const projectName = document.createElement("span");
+        projectName.textContent = name;
+        newProject.appendChild(projectName);
+
+        const dltProject = document.createElement('span');
+        dltProject.classList.add('deleteProject');
+        dltProject.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="deleteProject" width="16" height="16" fill="none" stroke="#ff3b30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path d="M19 6l-1 14H6L5 6"></path>
+        <path d="M10 11v6"></path>
+        <path d="M14 11v6"></path>
+        <path d="M9 6V4h6v2"></path>
+        </svg>`;
+        newProject.appendChild(dltProject);
+        dltProject.addEventListener('click', (event) => {
+            const projectButton = dltProject.parentElement;
+            const projectName = projectButton.getAttribute('data-project');
+            openDeleteModal(projectName);
+        });
+        
     });
 }
 
@@ -42,11 +65,18 @@ export const taskDisplay = function(todo){
     dlt.textContent='delete'
     dlt.addEventListener('click',()=>{
         state.todoArr.splice(state.todoArr.indexOf(todo), 1);
-        localStorage.setItem("todos",JSON.stringify(todoArr));
+        localStorage.setItem("todos",JSON.stringify(state.todoArr));
         taskEntry.remove();
     })
 
-    console.log(todo.impStatus);
+    const edit = document.createElement('button');
+    edit.textContent="edit";
+    edit.addEventListener('click',()=>{
+        console.log("taskEditor called for:", todo);
+        taskEditor(todo);
+    })
+
+    
     if(todo.impStatus){
         const imp = document.createElement('button');
         imp.addEventListener('click',()=>{
@@ -61,17 +91,20 @@ export const taskDisplay = function(todo){
     }
 
     taskEntry.appendChild(newTask);
+    taskEntry.appendChild(edit);
     taskEntry.appendChild(dlt);
 
     document.querySelector('.taskContainer').appendChild(taskEntry);
 };
 
-export const taskfilter= function(prj){
-    document.querySelector('.taskContainer').innerHTML="";
-    
-    const filteredTasks= state.todoArr.filter(task=>task.project==prj);
+export const renderAllTodos = function(project = null) {
+    document.querySelector('.taskContainer').innerHTML = "";
 
-    filteredTasks.forEach(task=>{
+    const filteredTasks = project
+        ? state.todoArr.filter(task => task.project === project)
+        : state.todoArr;
+
+    filteredTasks.forEach(task => {
         taskDisplay(task);
     });
 };

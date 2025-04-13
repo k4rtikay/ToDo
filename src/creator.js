@@ -6,12 +6,13 @@ const state = {
   };
   
 
-const createTodo = function(name,duedate,important,project){
+const createTodo = function(name,duedate,important,project,description){
     let todo ={
         name: name,
         duedate: duedate,
         impStatus: important,
-        project: project
+        project: project,
+        description:description,
     }
 
     state.todoArr.push(todo);

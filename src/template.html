@@ -8,13 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <div class="projectPane">
-            <button class="addProject">Add a project</button>
-            <button class="today">Today</button>
-            <button class="thisWeek">This Week</button>
-            <button class="later">Sometime Later</button>
-            <div class="project"></div>
-        </div> 
+        <aside class="projectPane">
+            <section class="system-projects">
+            <button class="today">☀️ Today</button>
+            <button class="thisWeek">📅 This Week</button>
+            <button class="later">⏳ Sometime Later</button>
+            </section>
+
+            <section class="custom-projects">
+                <button class="addProject">+ Add project</button>
+                <div class="project"></div>
+            </section>
+            
+        </aside> 
         <div class="task">
             <button class="addTask">Add a To-Do</button>
             <div class="taskContainer"></div>
@@ -31,40 +37,40 @@
 
     <dialog class="TaskModal">
         <form id="TaskForm">
+            <h3>Add a new task:</h3>
             <label for="title">Title:</label>
             <input type="text" name="title" id="taskTitle" required>
             <label for="DueDate">Due Date:</label>
             <input type="date" name="DueDate" id="DueDate" required>
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea><br>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea>
             <label><input type="checkbox" name="category" value="Important" id="important"> Important</label>
             <label for="project">Select project:</label>
-            <select name="project" id="selectProject" required>
-                <option value="Today">Today</option>
-                <option value="This week">This week</option>
-                <option value="Sometime later">Sometime later</option>
-            </select>
+            <select name="project" id="selectProject" required></select>
             <button type="submit" class="submitTask">Submit</button>
         </form>
     </dialog>
 
     <dialog class="editModal">
         <form id="editForm">
+            <h3>Edit your task:</h3>
             <label for="title">Title:</label>
             <input type="text" name="title" id="editTitle" required>
             <label for="DueDate">Due Date:</label>
-            <input type="date" name="DueDate" id="DueDate" required>
-            <label for="description">Description:</label><br>
-            <textarea id="description" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea><br>
-            <label><input type="checkbox" name="category" value="Important" id="important"> Important</label>
+            <input type="date" name="DueDate" id="editDueDate" required>
+            <label for="description">Description:</label>
+            <textarea id="editDescription" name="description" rows="10" cols="50" placeholder="Detail your task here..."></textarea>
+            <label><input type="checkbox" name="category" value="Important" id="editImportant"> Important</label>
             <label for="project">Select project:</label>
-            <select name="project" id="selectProject" required>
-                <option value="Today">Today</option>
-                <option value="This week">This week</option>
-                <option value="Sometime later">Sometime later</option>
-            </select>
-            <button type="submit" class="submitTask">Submit</button>
+            <select name="project" id="editSelectProject" required></select>
+            <button type="submit" class="submitEdit">Submit</button>
         </form>
+    </dialog>
+
+    <dialog class="deleteModal">
+        <p>Are you sure you want to delete this project and all it's tasks?</p>
+        <button class="confirmDelete">Delete</button>
+        <button class="cancelDelete">Cancel</button>
     </dialog>
     
 </body>
