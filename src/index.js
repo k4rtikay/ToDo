@@ -1,11 +1,9 @@
 import "./styles.css";
-import { initializeModalListeners, openEditModal } from "./modalHandler.js";
+import { initializeModalListeners } from "./modalHandler.js";
 import { renderAllTodos, todayFilter, weekFilter, laterFilter, renderAllProjects } from "./displayUpdater.js";
 import { createProject,createTodo, state } from "./creator.js";
 
 document.addEventListener('DOMContentLoaded',initializeModalListeners);
-
-//document.addEventListener('DOMContentLoaded',openEditModal);
 
 
 document.addEventListener('DOMContentLoaded',()=>{
@@ -29,7 +27,7 @@ document.querySelector('.submitTask').addEventListener('click',()=>{
     const description = document.querySelector("#description").value;
 
     createTodo(title,date,important,project,description);
-    //renderAllTodos(project);
+    renderAllTodos(project);
 })
 
 document.querySelector('.project').addEventListener('click', (event) => {
