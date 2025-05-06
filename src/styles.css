@@ -251,7 +251,6 @@
     box-shadow: 0 4px 10px rgba(0, 113, 227, 0.2);
   }
   
-  /* Add these helpful utility classes */
   .checkbox {
     width: 20px;
     height: 20px;
@@ -262,7 +261,7 @@
     transition: all 0.2s ease;
   }
   
-  .checkbox.checked {
+  .checkbox:checked {
     background-color: #34c759;
     border-color: #34c759;
   }
@@ -290,6 +289,8 @@
   color: var(--text-primary);
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .TaskModal,
@@ -303,6 +304,11 @@
   background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
+}
+
+.TaskModal::-webkit-scrollbar,
+.editModal::-webkit-scrollbar{
+  display: none;
 }
 
 /* Form styling */

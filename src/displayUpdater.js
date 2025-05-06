@@ -54,9 +54,10 @@ export const taskDisplay = function(todo){
 
     const checkbox = document.createElement('input');
     checkbox.type = "checkbox";
+    checkbox.classList.add('checkbox')
 
     checkbox.addEventListener('change',()=>{
-        taskEntry.style.color = checkbox.checked ? "#B3B3BC" : "black";
+        taskEntry.classList.toggle('completed');
     })
 
     const taskCheck = document.createElement('div')
